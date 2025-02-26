@@ -1,4 +1,4 @@
-# Leetcode Multiple Choice
+# Leetcode Prefix Sum
 
 ## 1749. Maximum Absolute Sum of Any Subarray
 
