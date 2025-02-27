@@ -499,3 +499,191 @@ class Solution:
         
         return -1
 ```
+# 1202. Smallest String With Swaps
+
+### Problem Statement
+You are given a string `s` and an array of pairs `pairs` where `pairs[i] = [a, b]` indicates that you can swap the characters at indices `a` and `b` in the string.
+
+You can perform multiple swaps on the string. The goal is to make the string as small as possible in lexicographical order using the given swap pairs.
+
+Return the lexicographically smallest string that can be obtained by applying the given swaps.
+
+### Examples
+
+#### Example 1:
+```
+Input: s = "dcab", pairs = [[0,3],[1,2]]
+Output: "bacd"
+Explanation: 
+Swap s[0] and s[3], s = "bcad"
+Swap s[1] and s[2], s = "bacd"
+```
+
+#### Example 2:
+```
+Input: s = "dcab", pairs = [[0,3],[1,2],[0,2]]
+Output: "abcd"
+Explanation: 
+Swap s[0] and s[3], s = "bcad"
+Swap s[1] and s[2], s = "bacd"
+Swap s[0] and s[2], s = "abcd"
+```
+
+#### Example 3:
+```
+Input: s = "cba", pairs = [[0,1],[1,2]]
+Output: "abc"
+Explanation: 
+Swap s[0] and s[1], s = "bca"
+Swap s[1] and s[2], s = "bac"
+Swap s[0] and s[1], s = "abc"
+```
+
+#### Constraints:
+* `1 <= s.length <= 10^5`
+* `0 <= pairs.length <= 10^5`
+* `0 <= pairs[i][0], pairs[i][1] < s.length`
+* `s` only contains lowercase English letters.
+
+### 📌 Multiple Choice Questions: Union Find Approach  
+
+#### 1️⃣ What insight about the swap operations is crucial for solving this problem?  
+- [ ] A) Swaps should be performed in a specific order
+- [ ] B) Only adjacent characters can be effectively swapped
+- [ ] C) Characters in the same connected component can be rearranged in any order
+- [ ] D) Each character can only be swapped once
+
+<details>
+  <summary>💡 Answer</summary>
+  
+  ✅ **C) Characters in the same connected component can be rearranged in any order**  
+  
+  If there is a path of swaps connecting indices i and j, then characters at those positions can be swapped through a series of operations. This means all characters in a connected component can be rearranged in any order.
+</details>  
+
+---
+
+#### 2️⃣ How are the characters grouped after the Union-Find operation?  
+- [ ] A) By their parent/root indices in the disjoint set
+- [ ] B) By their original order in the string
+- [ ] C) By their lexicographical order
+- [ ] D) By the frequency of swap operations
+
+<details>
+  <summary>💡 Answer</summary>
+  
+  ✅ **A) By their parent/root indices in the disjoint set**  
+  
+  After Union-Find, characters are grouped by their parent (root) indices, which represent the connected components formed by the swap pairs.
+</details>  
+
+---
+
+#### 3️⃣ What data structure is used to store the grouped characters and their indices?  
+- [ ] A) Array of lists
+- [ ] B) Set of tuples
+- [ ] C) Dictionary with tuple values (lists of indices and characters)
+- [ ] D) Priority queue
+
+<details>
+  <summary>💡 Answer</summary>
+  
+  ✅ **C) Dictionary with tuple values (lists of indices and characters)**  
+  
+  The solution uses a defaultdict where keys are the root indices and values are tuples containing two lists: one for original indices and one for characters.
+</details>  
+
+---
+
+#### 4️⃣ What is the purpose of sorting both indices and characters within each group?  
+- [ ] A) To ensure the original character order is preserved
+- [ ] B) To place the smallest characters at the smallest available indices
+- [ ] C) To minimize the number of swaps needed
+- [ ] D) To verify the correctness of the Union-Find algorithm
+
+<details>
+  <summary>💡 Answer</summary>
+  
+  ✅ **B) To place the smallest characters at the smallest available indices**  
+  
+  Sorting both indices and characters ensures that within each connected component, the smallest characters will be placed at the smallest indices, which helps achieve the lexicographically smallest string.
+</details>  
+
+---
+
+#### 5️⃣ What is the time complexity of this solution?  
+- [ ] A) O(n + m), where n is the string length and m is the number of pairs
+- [ ] B) O(n log n)
+- [ ] C) O(n + m + k log k), where k is the maximum size of a connected component
+- [ ] D) O(n^2)
+
+<details>
+  <summary>💡 Answer</summary>
+  
+  ✅ **C) O(n + m + k log k), where k is the maximum size of a connected component**  
+  
+  The time complexity comes from: processing the string (O(n)), union-find operations (O(m α(n)) which is effectively O(m)), and sorting characters within each component (O(k log k) for each component, where k is the component size).
+</details>  
+
+```python
+class Solution:
+    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
+        '''
+        Approach: Union-Find with Component Sorting
+        
+        1. Use Union-Find to identify connected components
+        2. Group characters by their connected components
+        3. Sort characters within each component
+        4. Reconstruct the string by placing sorted characters at their original positions
+        '''
+        def find(x):
+            if x == root[x]:
+                return x
+            
+            root[x] = find(root[x])
+            
+            return root[x]
+        
+        def union(x, y):
+            rootx = find(x)
+            rooty = find(y)
+
+            if rootx != rooty:
+                if rank[x] > rank[y]:
+                    root[rooty] = rootx
+                
+                elif rank[x] < rank[y]:
+                    root[rootx] = rooty
+                
+                else:
+                    root[rooty] = rootx
+                    rank[rootx] += 1
+        
+        root = [i for i in range(len(s))]
+        rank = [1] * len(s)
+
+        # 1. Union-Find to connect all indices that can be swapped
+        for a, b in pairs:
+            union(a, b)
+
+        # 2. Grouping indices and characters by their connected components
+        group = defaultdict(lambda: ([], []))
+
+        for i, ch in enumerate(s):
+            parent = find(i)
+            group[parent][0].append(i)
+            group[parent][1].append(ch)
+        
+        # 3. Sorting indices and characters within each component
+        res = [''] * len(s)
+
+        for idxs, chars in group.values():
+            idxs.sort()
+            chars.sort()
+
+            # 4. Reconstruct the string by placing characters optimally
+            for ch, i in zip(chars, idxs):
+                res[i] = ch
+        
+        return ''.join(res)
+```
