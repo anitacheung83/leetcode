@@ -44,7 +44,7 @@ class UnionFind():
       '''
       return self.find(a) == self.find(b)
 ```
-* [547. Number of Provinces](#547.-Number-of-Provinces)
+* [547. Number of Provinces](#547-number-of-provinces)
 # 547. Number of Provinces
 
 ### Problem Statement
