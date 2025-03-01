@@ -44,7 +44,14 @@ class UnionFind():
       '''
       return self.find(a) == self.find(b)
 ```
-* [547. Number of Provinces](#547-number-of-provinces)
+
+## Questions
+1. [547. Number of Provinces](#547-number-of-provinces)
+2. [323. Number of Connected Components in an Undirected Graph](#323-number-of-connected-components-in-an-undirected-graph)
+3. [1101. The Earliest Moment When Everyone Become Friends](#1101-the-earliest-moment-when-everyone-become-friends)
+4. [1202. Smallest String With Swaps](#1202-smallest-string-with-swaps)
+
+
 # 547. Number of Provinces
 
 ### Problem Statement
