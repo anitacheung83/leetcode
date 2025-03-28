@@ -1,4 +1,4 @@
-# LeetCode Binary Search
+# Binary Search
 
 # Problems
 1. [875. Koko Eating Bananas](#875-koko-eating-bananas)
