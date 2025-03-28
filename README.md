@@ -2,7 +2,7 @@
 * [Array](https://github.com/anitacheung83/leetcode/blob/main/Array.md)
 * [Two Pointers](https://github.com/anitacheung83/leetcode/blob/main/Two%20Pointers%20.md)
 * [1D Dynamic Programming Tabulation](https://github.com/anitacheung83/leetcode/blob/main/1D%20Dynamic%20Programming%20Tabulation.md)
-    * 198\. House Robber
+    * [198\. House Robber](https://github.com/anitacheung83/leetcode/blob/main/1D%20Dynamic%20Programming%20Tabulation.md#198-house-robber)
 * [2D Dynamic Programming Tabulation](https://github.com/anitacheung83/leetcode/blob/main/2D%20Dynamic%20Programming%20Tabulation.md)
     * 1143\. Longest Common Subsequence
     * 97\. Interleaving String
