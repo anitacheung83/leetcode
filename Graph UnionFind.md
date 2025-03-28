@@ -1,4 +1,4 @@
-# Leetcode Graph Union Find
+# Graph Union Find
 
 ```Python
 class UnionFind():
