@@ -1,5 +1,10 @@
 # Backtracking
 
+## Problems
+1. [1415. The k-th Lexicographical String of All Happy Strings of Length n](#1415-the-k-th-lexicographical-string-of-all-happy-strings-of-length-n)
+2. [2375. Construct Smallest Number From DI String](#2375-construct-smallest-number-from-di-string)
+3. 
+
 # 1415. The k-th Lexicographical String of All Happy Strings of Length n
 
 ### Problem Statement
