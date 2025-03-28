@@ -1,5 +1,10 @@
 # LeetCode Binary Search
 
+# Problems
+1. [875. Koko Eating Bananas](#875-koko-eating-bananas)
+2. [2300. Successful Pairs of Spells and Potions](#2300-successful-pairs-of-spells-and-potions)
+3. [162. Find Peak Element](#162-find-peak-element)
+
 # 875. Koko Eating Bananas
 
 ### Problem Statement
