@@ -1,6 +1,9 @@
-# Leetcode Prefix Sum
+# Prefix Sum
 
-## 1749. Maximum Absolute Sum of Any Subarray
+## Problems
+1. [1749. Maximum Absolute Sum of Any Subarray](#1749-maximum-absolute-sum-of-any-subarray)
+
+# 1749. Maximum Absolute Sum of Any Subarray
 
 ### Problem Statement
 
